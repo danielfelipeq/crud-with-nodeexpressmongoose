@@ -1,18 +1,11 @@
 const { Schema, model, models } = require("mongoose");
 const { required } = require("nodemon/lib/config");
 
-RegExp.escape = function (s) {
-  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-};
+const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+const passwordRegex = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+const nameRegex = /^[a-z A-Z]{1,10}$/i;
+const phoneRegex = /^(\(?\+[\d]{2}\)?)\s?([\d]{3})\s?([\d][\s\.-|.]?){4}$/;
 
-const emailRegex = new RegExp("^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$");
-const passwordRegex = new RegExp(
-  "(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-);
-const nameRegex = new RegExp("^[a-zA-Z]{1,10}$");
-const phoneRegex = new RegExp(
-  "(?([+][0-9]{2}))?([ .-]?)([0-9]{3})\2([0-9]{3})\2([0-9]{4})"
-);
 const userSchema = new Schema(
   {
     role: {
